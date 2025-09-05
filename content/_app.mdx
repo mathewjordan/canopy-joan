@@ -1,6 +1,23 @@
 export const Head = () => (
   <>
     <meta name="theme-color" content="#111" />
+
+  <!-- InstantSearch + Algolia client (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8/themes/reset-min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8/themes/algolia-min.css">
+  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 2rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .ais-SearchBox { margin-bottom: 1rem; }
+    .hit { display: grid; gap: .25rem; padding: .75rem 0; border-bottom: 1px solid #eee; }
+    .hit-title { font-weight: 600; }
+    .hit-desc { color: #555; }
+    .meta { font-size: .85rem; color: #666; }
+  </style>
+
   </>
 );
 
