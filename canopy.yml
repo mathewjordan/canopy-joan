@@ -1,5 +1,5 @@
 collection:
-  uri: https://api.dc.library.northwestern.edu/api/v2/search?query=%28joan+baez%29&size=40&as=iiif
+  uri: https://mat.digital
 iiif:
   thumbnails:
     # Enable to create thumbnails for Manifests missing `thumbnail` property
