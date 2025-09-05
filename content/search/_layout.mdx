@@ -19,3 +19,69 @@
     <div id="pagination" style="margin-top:1rem;"></div>
   </div>
 </div>
+ <script>
+    // 1) Configure your Algolia credentials
+    const ALGOLIA_APP_ID = 'VY0JKEX4JA';
+    const ALGOLIA_SEARCH_API_KEY = 'ea919b98150b073b88406ca88cbf61dd'; // use the *search-only* key client-side
+    const ALGOLIA_INDEX_NAME = 'search-index';
+
+    // 2) Create the Algolia client and InstantSearch instance
+    const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY);
+    const search = instantsearch({
+      indexName: ALGOLIA_INDEX_NAME,
+      searchClient
+    });
+
+    // 3) Add widgets
+    search.addWidgets([
+      instantsearch.widgets.searchBox({
+        container: '#searchbox',
+        placeholder: 'Search…',
+        showReset: true,
+        showLoadingIndicator: true
+      }),
+
+      instantsearch.widgets.stats({
+        container: '#stats',
+        templates: {
+          text(data) {
+            const { nbHits, processingTimeMS } = data;
+            return `${nbHits.toLocaleString()} results • ${processingTimeMS} ms`;
+          }
+        }
+      }),
+
+      // Customize how each hit renders
+      instantsearch.widgets.hits({
+        container: '#hits',
+        templates: {
+          item(hit) {
+            // Adjust these fields to match your index attributes
+            const title = hit._highlightResult?.title?.value ?? hit.title ?? '(untitled)';
+            const description = hit._snippetResult?.description?.value
+              ?? hit._highlightResult?.description?.value
+              ?? '';
+            const url = hit.url || '#';
+
+            return `
+              <article class="hit">
+                <a href="${url}" class="hit-title">${title}</a>
+                <div class="hit-desc">${description}</div>
+              </article>
+            `;
+          },
+          empty(results) {
+            return `No results for "<strong>${instantsearch.highlight({ attribute: 'query', hit: results })}</strong>"`;
+          }
+        }
+      }),
+
+      instantsearch.widgets.pagination({
+        container: '#pagination',
+        scrollTo: '.container'
+      })
+    ]);
+
+    // 4) Start the search UI
+    search.start();
+  </script>
