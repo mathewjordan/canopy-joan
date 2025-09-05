@@ -1,7 +1,21 @@
 # Search
 
 <div className="mx-auto max-w-content w-full px-4 py-6 space-y-4">
-  <SearchForm />
-  <SearchSummary />
-  <SearchResults />
+  <div class="container">
+    <h1>Site Search</h1>
+
+    <!-- Search box -->
+    <div id="searchbox"></div>
+
+    <!-- Stats & refinement (optional) -->
+    <div class="meta">
+      <span id="stats"></span>
+    </div>
+
+    <!-- Results -->
+    <div id="hits"></div>
+
+    <!-- Pagination -->
+    <div id="pagination" style="margin-top:1rem;"></div>
+  </div>
 </div>
